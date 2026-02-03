@@ -1,12 +1,28 @@
-from stats import word_cnt 
+import sys
+from stats import word_cnt,char_cnt,dic_list
 
 def get_book_text(path):
     with open(path) as f:
-        file_content = f.read()
-    return file_content
+        return f.read()
 
-def path():
-    x = "./books/frankenstein.txt"
-    return get_book_text(x)
+def main():
+    print("============ BOOKBOT ============")
+    print ("Analyzing book found at books/frankenstein.txt...")
 
-word_cnt()
+    text = get_book_text("./books/frankenstein.txt")
+    print("----------- Word Count ----------")
+    total_words = word_cnt(text)
+    print(f"Found {total_words} total words")
+
+    print("--------- Character Count -------")
+    dic = char_cnt(text)
+    char_counts = dic_list(dic)
+    for item in char_counts:
+        if item["char"].isalpha():
+            print(f"{item["char"]}: {item["num"]}")
+        else:
+            pass
+    print("============= END ===============")
+
+
+main()
